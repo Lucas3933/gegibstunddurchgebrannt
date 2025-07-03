@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gegibst und durchgebrannt - Hochwertige Laser & 3D-Druck Produkte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Cookie-Banner Styles */
+        #cookie-consent-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        .cookie-consent-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: #333;
+            text-align: center;
+        }
+        
+        .cookie-consent-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .cookie-consent-text {
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .cookie-consent-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .cookie-btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        
+        .cookie-btn-accept {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .cookie-btn-accept:hover {
+            background-color: #1e3a8a;
+            transform: translateY(-2px);
+        }
+        
+        .cookie-btn-reject {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+        
+        .cookie-btn-reject:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .cookie-link {
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        
+        /* Versteckt den Hauptinhalt bis zur Entscheidung */
+        body.cookie-pending {
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .main-content {
+            display: none;
+        }
+        
+        /* Rest des bestehenden CSS */
+        :root {
+            --primary: #2a4365;
+            --secondary: #f6ad55;
+            --dark: #1a202c;
+            --light: #f7fafc;
+        }
+        
+        /* Modal für Produktdetails */
+        .detail-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .detail-modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .close-detail {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-detail:hover {
+            color: var(--primary);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('4.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #e69c3f;
+        }
+        
+        .products {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: none;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+        
+        /* Filter-Styles */
+        .filter-section {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .filter-group select, .filter-group input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .filter-group input[type="range"] {
+            padding: 0;
+        }
+        
+        .price-range-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .reset-filters {
+            background-color: #e0e0e0;
+            color: var(--dark);
+            margin-left: auto;
+        }
+        
+        .reset-filters:hover {
+            background-color: #d0d0d0;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .product-tech {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .product-points {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .points {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .product-category {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background-color: #e0e7ff;
+            color: #4338ca;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1200px;
+            max-height: 80vh;
+            object-fit: contain;
+            margin-top: 5vh;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Kontaktbereich Stile */
+        .contact-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--secondary);
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Produktkategorien Farben */
+        .category-laser-holz {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        
+        .category-laser-glas {
+            background-color: #e0f2fe;
+            color: #075985;
+        }
+        
+        .category-3d-druck {
+            background-color: #fae8ff;
+            color: #86198f;
+        }
+        
+        /* Neue Kategorie-Styles */
+        .category-laser-leder {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .category-laser-Schiefer {
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+
+        .category-laser-Spiegel {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        /* Welcome Section Styles */
+        .welcome-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+        }
+
+        .welcome-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-section .btn {
+            margin-top: 1rem;
+        }
+        
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="cookie-pending">
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner">
+        <div class="cookie-consent-container">
+            <h2 class="cookie-consent-title">Cookie-Einstellungen</h2>
+            <p class="cookie-consent-text">
+                Wir verwenden Cookies, um Ihnen das beste Erlebnis auf unserer Website zu bieten. 
+                Einige Cookies sind notwendig für die Funktionalität der Seite. 
+                Weitere Informationen finden Sie in unserer <a href="#" class="cookie-link">Cookie-Richtlinie</a>.
+            </p>
+            <div class="cookie-consent-buttons">
+                <button id="accept-cookies" class="cookie-btn cookie-btn-accept">
+                    Alle akzeptieren
+                </button>
+                <button id="reject-cookies" class="cookie-btn cookie-btn-reject">
+                    Ablehnen
+                </button>
+                <button id="essential-cookies" class="cookie-btn cookie-btn-reject">
+                    Nur notwendige
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hauptinhalt -->
+    <div class="main-content">
+        <!-- Detail Modal -->
+        <div id="detailModal" class="detail-modal">
+            <div class="detail-modal-content">
+                <span class="close-detail">&times;</span>
+                <h2 id="modalProductTitle">Produktname</h2>
+                <div id="modalProductContent">
+                    <!-- Hier kommt der Produkttext -->
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <div class="logo">gegibst und durchgebrannt</div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showWelcomeSection()">HOME</a></li>
+                    <li><a href="#products" onclick="showProducts()">Produkte</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h1>Innovative Laser & 3D-Druck Produkte</h1>
+            <p>Entdecken Sie unsere hochwertigen Produkte</p>
+            <a href="#products" class="btn" onclick="showProducts()">Produkte entdecken</a>
+        </section>
+        
+        <!-- Welcome Section -->
+        <section class="welcome-section" id="welcome">
+            <h2>Willkommen bei gegibst und durchgebrannt</h2>
+            <p>Wir sind ein innovatives Unternehmen, das sich auf hochwertige Laser- und 3D-Druck-Produkte spezialisiert hat. Unsere handgefertigten Unikate werden mit größter Sorgfalt und Präzision hergestellt.</p>
+            <p>Jedes unserer Produkte ist einzigartig und kann nach Ihren Wünschen personalisiert werden. Ob als besonderes Geschenk oder für den eigenen Gebrauch - bei uns finden Sie garantiert das Richtige.</p>
+            <p>Klicken Sie auf "Produkte" in der Navigation oder auf den Button unten, um unsere Kollektion zu entdecken.</p>
+            <a href="#products" class="btn" onclick="showProducts()">Zu den Produkten</a>
+        </section>
+        
+        <!-- Products Section (initially hidden) -->
+        <section class="products" id="products">
+            <h2 class="section-title">Unsere Top-Produkte</h2>
+            
+            <!-- Filter-Sektion -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label for="category-filter">Produktart</label>
+                    <select id="category-filter">
+                        <option value="all">Alle Kategorien</option>
+                        <option value="laser-glas">Laser Produkt (Glas)</option>
+                        <option value="laser-holz">Laser Produkt (Holz)</option>
+                        <option value="laser-leder">Laser Produkt (Leder)</option>
+                        <option value="laser-Schiefer">Laser Produkt (Schiefer)</option>
+                        <option value="laser-Spiegel">Laser Produkt (Spiegel)</option>
+                        <option value="3d-druck">3D Drucker Produkt</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="price-range">Preisbereich (€)</label>
+                    <input type="range" id="price-range" min="0" max="200" step="10" value="200">
+                    <div class="price-range-values">
+                        <span id="min-price">0</span>
+                        <span id="max-price">200</span>
+                    </div>
+                </div>
+                
+                <button class="btn reset-filters" id="reset-filters">Filter zurücksetzen</button>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Produkt 1 - Mama Schild -->
+                <div class="product-card" data-category="laser-holz" data-price="50">
+                    <img src="1714671339918.jpg" alt="Mama Schild" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-laser-holz">Laser Produkt (Holz)</span>
+                        <h3 class="product-title">Mama Schild</h3>
+                        <p class="product-tech">Handgefertigtes Holzschild mit individueller Gravur</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€35-50</p>
+                        <button class="btn detail-btn" 
+                            data-title="Mama Schild" 
+                            data-content="<p>Das Mama Schild ist ein handgefertigtes Kunstwerk aus hochwertigem Material. Perfekt als Geschenk für alle Mütter.</p>
+                            <p><strong>Material:</strong> Hochwertiges Holz</p>
+                            <p><strong>Größe:</strong> 30cm x 20cm</p>
+                            <p><strong>Lieferzeit:</strong> 3-5 Werktage</p>
+                            <p><strong>Preis:</strong> 35€ ohne Lichterkette, 40€ mit Lichterkette, 50€ individuell gestaltet</p>
+                            <p><strong>Besonderheiten:</strong> Individuelle Gravur möglich</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produkt 2 - Papa Schild -->
+                <div class="product-card" data-category="laser-holz" data-price="50">
+                    <img src="1714671339943.jpg" alt="Papa Schild" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-laser-holz">Laser Produkt (Holz)</span>
+                        <h3 class="product-title">Papa Schild</h3>
+                        <p class="product-tech">Handgefertigtes Holzschild mit individueller Gravur</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€35-50</p>
+                        <button class="btn detail-btn" 
+                            data-title="Papa Schild" 
+                            data-content="<p>Das Papa Schild ist ein stilvolles Accessoire für jeden stolzen Vater. Handgefertigt mit Liebe zum Detail.</p>
+                            <p><strong>Material:</strong> Hochwertiges Holz</p>
+                            <p><strong>Größe:</strong> 30cm x 20cm</p>
+                            <p><strong>Lieferzeit:</strong> 3-5 Werktage</p>
+                            <p><strong>Preis:</strong> 35€ ohne Lichterkette, 40€ mit Lichterkette, 50€ individuell gestaltet</p>
+                            <p><strong>Besonderheiten:</strong> Individuelle Gravur möglich</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>                <!-- Produkt 3 - Opa Schild -->
+                <div class="product-card" data-category="laser-holz" data-price="50">
+                    <img src="1714671339957.jpg" alt="Opa Schild" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-laser-holz">Laser Produkt (Holz)</span>
+                        <h3 class="product-title">Opa Schild</h3>
+                        <p class="product-tech">Handgefertigtes Holzschild mit individueller Gravur</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€35-50</p>
+                        <button class="btn detail-btn" 
+                            data-title="Opa Schild" 
+                            data-content="<p>Das Opa Schild ist das perfekte Geschenk für den besten Opa der Welt. Hochwertige Verarbeitung und langlebig.</p>
+                            <p><strong>Material:</strong> Hochwertiges Holz</p>
+                            <p><strong>Größe:</strong> 30cm x 20cm</p>
+                            <p><strong>Lieferzeit:</strong> 3-5 Werktage</p>
+                            <p><strong>Preis:</strong> 35€ ohne Lichterkette, 40€ mit Lichterkette, 50€ individuell gestaltet</p>
+                            <p><strong>Besonderheiten:</strong> Individuelle Gravur möglich</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produkt 4 - Oma Schild -->
+                <div class="product-card" data-category="laser-holz" data-price="50">
+                    <img src="1714671339950.jpg" alt="Oma Schild" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-laser-holz">Laser Produkt (Holz)</span>
+                        <h3 class="product-title">Oma Schild</h3>
+                        <p class="product-tech">Handgefertigtes Holzschild mit individueller Gravur</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€35-50</p>
+                        <button class="btn detail-btn" 
+                            data-title="Oma Schild" 
+                            data-content="<p>Das Oma Schild ist ein liebevoll gestaltetes Geschenk für die beste Oma. Handgefertigt mit höchster Präzision.</p>
+                            <p><strong>Material:</strong> Hochwertiges Holz</p>
+                            <p><strong>Größe:</strong> 30cm x 20cm</p>
+                            <p><strong>Lieferzeit:</strong> 3-5 Werktage</p>
+                            <p><strong>Preis:</strong> 35€ ohne Lichterkette, 40€ mit Lichterkette, 50€ individuell gestaltet</p>
+                            <p><strong>Besonderheiten:</strong> Individuelle Gravur möglich</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produkt 5 - Graviertes Glas -->
+                <div class="product-card" data-category="laser-glas" data-price="20">
+                    <img src="https://via.placeholder.com/2221x1072/2a4365/ffffff?text=GRAVIERTES+GLAS" alt="Graviertes Glas" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-laser-glas">Laser Produkt (Glas)</span>
+                        <h3 class="product-title">Graviertes Glas</h3>
+                        <p class="product-tech">Individuelle Gravur auf Glas</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€20</p>
+                        <button class="btn detail-btn" 
+                            data-title="Graviertes Glas" 
+                            data-content="<p>Glas mit individueller Gravur - das perfekte Geschenk für deine Liebsten.</p>
+                            <p><strong>Material:</strong> Glas</p>
+                            <p><strong>Größe:</strong> 24cm hoch, 300ml-1l Fassungsvermögen</p>
+                            <p><strong>Lieferzeit:</strong> 5-7 Werktage</p>
+                            <p><strong>Besonderheiten:</strong> Individueller Text, Muster oder Form möglich</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produkt 6 - Schieferschild -->
+                <div class="product-card" data-category="laser-Schiefer" data-price="79">
+                    <img src="20250607_200742.jpg" alt="Schieferschild mit Gravur" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-laser-Schiefer">Laser Produkt (Schiefer)</span>
+                        <h3 class="product-title">Schieferschild mit Gravur</h3>
+                        <p class="product-tech">Hochwertige Schiefergravur</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€79</p>
+                        <button class="btn detail-btn" 
+                            data-title="Schieferschild mit Gravur" 
+                            data-content="<p>Schieferschild mit individueller Laser-Gravur.</p>
+                            <p><strong>Material:</strong> Schiefer</p>
+                            <p><strong>Größe:</strong> 15x10cm</p>
+                            <p><strong>Lieferzeit:</strong> 5-7 Werktage</p>
+                            <p><strong>Besonderheiten:</strong> Individueller Text oder Muster möglich</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Produkt 7 - 3D-Portrait -->
+                <div class="product-card" data-category="3d-druck" data-price="40">
+                    <img src="20250607.jpg" alt="3D-Figur" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-3d-druck">3D Drucker Produkt</span>
+                        <h3 class="product-title">Personalisiertes 3D-Portrait</h3>
+                        <p class="product-tech">Maßgeschneiderte 3D-Figur nach Foto</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€40</p>
+                        <button class="btn detail-btn" 
+                            data-title="Personalisiertes 3D-Portrait" 
+                            data-content="<p>Einzigartige 3D-Figur nach Ihrem Foto - ideal als persönliches Geschenk.</p>
+                            <p><strong>Material:</strong> Hochwertiges PLA</p>
+                            <p><strong>Größe:</strong> ca. 15cm hoch</p>
+                            <p><strong>Lieferzeit:</strong> 5-10 Werktage</p>
+                            <p><strong>Besonderheiten:</strong> Individuelle Bilder und Formen</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Produkt 8 - Spiegel mit Gravur -->
+                <div class="product-card" data-category="laser-Spiegel" data-price="79">
+                    <img src="metallschild.jpg" alt="Spiegel mit Gravur" class="product-image" onclick="openModal(this)">
+                    <div class="product-info">
+                        <span class="product-category category-laser-Spiegel">Laser Produkt (Spiegel)</span>
+                        <h3 class="product-title">Spiegel mit Gravur</h3>
+                        <p class="product-tech">Hochwertige Spiegelgravur</p>
+                        <div class="product-points">
+                        </div>
+                        <p class="product-price">€79</p>
+                        <button class="btn detail-btn" 
+                            data-title="Spiegel mit Gravur" 
+                            data-content="<p>Robustes Metallschild mit individueller Laser-Gravur.</p>
+                            <p><strong>Material:</strong> Aluminium</p>
+                            <p><strong>Größe:</strong> 15x10cm</p>
+                            <p><strong>Lieferzeit:</strong> 5-7 Werktage</p>
+                            <p><strong>Besonderheiten:</strong> Individueller Text oder Muster möglich</p>">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Kontaktbereich -->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title">Kontaktieren Sie uns</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Bei Fragen oder Kaufwünschen gerne melden</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-user"></i> Ansprechpartner: Cindy Kinne</p>
+                        <p><i class="fas fa-map-marker-alt"></i> gegibst und durchgebrannt, 67127 Rödersheim Gronau</p>
+                        <p><i class="fas fa-phone"></i> +49 15258568005</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:gegibst.durchgebrannt@gmx.de">gegibst.durchgebrannt@gmx.de</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modal für Vollbildansicht -->
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+        
+        <footer>
+            <p>gegibst und durchgebrannt</p>
+            <p>Hochwertige Laser- und 3D-Druck produkte für jederman</p>
+            <p><a href="https://whatsapp.com/channel/0029VapomLn6LwHtJk8HQP1P"><i class="fab fa-whatsapp"></i> Unser Whatsapp Kanal</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Globale Variablen für die Modal-Elemente
+        let detailModal, modalTitle, modalContent, closeDetail;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cookie-Verwaltung
+            const cookieBanner = document.getElementById('cookie-consent-banner');
+            const mainContent = document.querySelector('.main-content');
+            const body = document.body;
+            
+            // Modal-Elemente initialisieren
+            detailModal = document.getElementById("detailModal");
+            modalTitle = document.getElementById("modalProductTitle");
+            modalContent = document.getElementById("modalProductContent");
+            closeDetail = document.querySelector('.close-detail');
+            
+            // Funktion zum Anzeigen des Hauptinhalts
+            function showContent() {
+                if (mainContent) {
+                    mainContent.style.display = 'block';
+                    body.classList.remove('cookie-pending');
+                    setupDetailButtons();
+                    setupFilters();
+                    
+                    // Scroll zur aktuellen Position (falls im #products Bereich)
+                    if(window.location.hash) {
+                        const element = document.querySelector(window.location.hash);
+                        if(element) {
+                            element.scrollIntoView();
+                        }
+                    }
+                }
+            }
+            
+            // Cookie-Consent Funktionen
+            function checkCookieConsent() {
+                const cookieConsent = getCookie('cookie_consent');
+                if (cookieConsent) {
+                    hideCookieBanner();
+                    showContent();
+                    if (cookieConsent === 'accepted') {
+                        loadTrackingCookies();
+                    }
+                    return true;
+                }
+                return false;
+            }
+            
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for(let i=0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+                }
+                return null;
+            }
+            
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/;SameSite=Lax";
+                
+                // Sofortigen Wechsel durchführen
+                hideCookieBanner();
+                showContent();
+                if (value === 'accepted') {
+                    loadTrackingCookies();
+                }
+                
+                // Nach Akzeptieren zur Hauptseite weiterleiten
+                if (value === 'accepted' || value === 'essential') {
+                    window.location.href = "#welcome";
+                }
+            }
+            
+            function loadTrackingCookies() {
+                console.log("Tracking-Cookies würden jetzt geladen werden");
+                // Hier Tracking-Skripte einbinden
+            }
+            
+            function hideCookieBanner() {
+                if (cookieBanner) cookieBanner.style.display = 'none';
+            }
+            
+            // Event Listener für Cookie-Buttons
+            document.getElementById('accept-cookies').addEventListener('click', function() {
+                setCookie('cookie_consent', 'accepted', 365);
+            });
+            
+                        document.getElementById('reject-cookies').addEventListener('click', function() {
+                setCookie('cookie_consent', 'rejected', 365);
+            });
+            
+            document.getElementById('essential-cookies').addEventListener('click', function() {
+                setCookie('cookie_consent', 'essential', 365);
+            });
+            
+            // Initiale Überprüfung
+            if (!checkCookieConsent()) {
+                cookieBanner.style.display = 'flex';
+            }
+            
+            // Detail-Buttons einrichten
+            function setupDetailButtons() {
+                const detailButtons = document.querySelectorAll('.detail-btn');
+                
+                detailButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const title = this.getAttribute('data-title');
+                        const content = this.getAttribute('data-content');
+                        
+                        modalTitle.textContent = title;
+                        modalContent.innerHTML = content;
+                        
+                        detailModal.style.display = 'block';
+                    });
+                });
+                
+                closeDetail.addEventListener('click', function() {
+                    detailModal.style.display = 'none';
+                });
+                
+                window.addEventListener('click', function(event) {
+                    if (event.target === detailModal) {
+                        detailModal.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Filter einrichten
+            function setupFilters() {
+                const categoryFilter = document.getElementById('category-filter');
+                const priceRange = document.getElementById('price-range');
+                const maxPrice = document.getElementById('max-price');
+                const resetFilters = document.getElementById('reset-filters');
+                const productCards = document.querySelectorAll('.product-card');
+                
+                priceRange.addEventListener('input', function() {
+                    maxPrice.textContent = this.value;
+                    filterProducts();
+                });
+                
+                categoryFilter.addEventListener('change', filterProducts);
+                
+                resetFilters.addEventListener('click', function() {
+                    categoryFilter.value = 'all';
+                    priceRange.value = 200;
+                    maxPrice.textContent = '200';
+                    filterProducts();
+                });
+                
+                function filterProducts() {
+                    const selectedCategory = categoryFilter.value;
+                    const maxPriceValue = parseInt(priceRange.value);
+                    
+                    productCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        const cardPrice = parseInt(card.getAttribute('data-price'));
+                        
+                        const categoryMatch = selectedCategory === 'all' || cardCategory === selectedCategory;
+                        const priceMatch = cardPrice <= maxPriceValue;
+                        
+                        card.style.display = (categoryMatch && priceMatch) ? 'block' : 'none';
+                    });
+                }
+            }
+            
+            // Navigation
+            window.showProducts = function() {
+                document.getElementById('welcome').style.display = 'none';
+                document.getElementById('products').style.display = 'block';
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+            
+            window.showWelcomeSection = function() {
+                document.getElementById('products').style.display = 'none';
+                document.getElementById('welcome').style.display = 'block';
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+            
+            // Bild-Modal
+            window.openModal = function(img) {
+                const modal = document.getElementById('imageModal');
+                const modalImg = document.getElementById('modalImage');
+                modal.style.display = 'block';
+                modalImg.src = img.src;
+            };
+            
+            window.closeModal = function() {
+                document.getElementById('imageModal').style.display = 'none';
+            };
+        });
+    </script>
+</body>
+</html>
